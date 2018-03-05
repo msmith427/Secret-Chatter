@@ -1,0 +1,5 @@
+﻿  chatForm.cpp
+chatForm.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+  chatForm.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+  ChatProject.vcxproj -> C:\Users\Mike\Documents\Secret-Chatter\SecretChatter\Debug\ChatProject.exe
+  ChatProject.vcxproj -> C:\Users\Mike\Documents\Secret-Chatter\SecretChatter\Debug\ChatProject.pdb (Partial PDB)
