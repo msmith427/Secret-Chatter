@@ -10,3 +10,8 @@ void main(array<String^>^ args) {
 	ChatProject::chatForm form;
 	Application::Run(%form);
 }
+
+void testFunction() {
+	int i = 1;
+	i = i + 9;
+}
