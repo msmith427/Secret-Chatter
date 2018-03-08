@@ -20,11 +20,9 @@ namespace SecretChatter
         static string ipstring;
         IPEndPoint targetIP;
         TcpClient tcp_client = new TcpClient();
-        TcpListener listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8881);
 
         public Form1()
         {
-            listener.Start();
             InitializeComponent();
         }
 
@@ -33,7 +31,7 @@ namespace SecretChatter
             username = inputUsername.Text;
             password = inputPassword.Text;
             ipstring = inputIP.Text;
-            targetIP = new IPEndPoint(IPAddress.Parse(ipstring), 8881);
+            targetIP = new IPEndPoint(IPAddress.Parse(ipstring), 8081);
             tcp_client.Connect(targetIP);
         }
 
@@ -43,6 +41,11 @@ namespace SecretChatter
             inputText.Text = "";
 
                         
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
