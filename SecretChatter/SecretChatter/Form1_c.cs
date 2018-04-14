@@ -32,23 +32,6 @@ namespace SecretChatter
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            //Clear buffers
-            Array.Clear(readbytes, 0, readbytes.Length);
-            Array.Clear(writebytes, 0, writebytes.Length);
-            try
-            {
-                // Read all bytes from client 
-                while (stream.Read(readbytes, 0, readbytes.Length) > 0)
-                {
-                    // Translate data bytes to a ASCII string and print to messageLog
-                    data = Encoding.ASCII.GetString(readbytes);
-                    messageLog.Text += (data);
-                }
-            }
-            catch (System.IO.IOException)
-            {
-                //messageLog.Text += "TIMEOUT!\r\n";
-            }
             //Send current message
             if (inputText.Text.Length > 0)
             {
@@ -67,11 +50,12 @@ namespace SecretChatter
             targetIP = new IPEndPoint(IPAddress.Parse(ipstring), 8081);
             tcp_client.Connect(targetIP);
             stream = tcp_client.GetStream();
-            tcp_client.ReceiveTimeout = 100;
             //Feedback after connection
             if (tcp_client.Connected)
             {
                 messageLog.Text += "Successful Connection!\r\n";
+                this.msgListen.RunWorkerAsync();
+
             }
             else
             {
@@ -82,6 +66,25 @@ namespace SecretChatter
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void msgListen_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (stream.Read(readbytes, 0, readbytes.Length) > 0)
+            {
+                // Report progress
+                this.msgListen.ReportProgress(1);
+
+            }
+        }
+
+        private void msgListen_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // Translate data bytes to a ASCII string and print to messageLog
+
+            data = Encoding.ASCII.GetString(readbytes);
+            messageLog.Text += (data);
+            Array.Clear(readbytes, 0, readbytes.Length);
         }
     }
 }
