@@ -44,7 +44,7 @@
             // messageLog
             // 
             this.messageLog.Location = new System.Drawing.Point(9, 10);
-            this.messageLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.messageLog.Margin = new System.Windows.Forms.Padding(2);
             this.messageLog.Multiline = true;
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
@@ -55,7 +55,7 @@
             // inputUsername
             // 
             this.inputUsername.Location = new System.Drawing.Point(386, 24);
-            this.inputUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputUsername.Margin = new System.Windows.Forms.Padding(2);
             this.inputUsername.Name = "inputUsername";
             this.inputUsername.Size = new System.Drawing.Size(192, 20);
             this.inputUsername.TabIndex = 1;
@@ -74,7 +74,7 @@
             // inputText
             // 
             this.inputText.Location = new System.Drawing.Point(9, 324);
-            this.inputText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputText.Margin = new System.Windows.Forms.Padding(2);
             this.inputText.Name = "inputText";
             this.inputText.Size = new System.Drawing.Size(313, 20);
             this.inputText.TabIndex = 3;
@@ -92,16 +92,17 @@
             // inputPassword
             // 
             this.inputPassword.Location = new System.Drawing.Point(386, 60);
-            this.inputPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputPassword.Margin = new System.Windows.Forms.Padding(2);
             this.inputPassword.Name = "inputPassword";
             this.inputPassword.Size = new System.Drawing.Size(192, 20);
             this.inputPassword.TabIndex = 5;
             this.inputPassword.Text = "randomPass";
+            this.inputPassword.UseSystemPasswordChar = true;
             // 
             // inputIP
             // 
             this.inputIP.Location = new System.Drawing.Point(386, 97);
-            this.inputIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputIP.Margin = new System.Windows.Forms.Padding(2);
             this.inputIP.Name = "inputIP";
             this.inputIP.Size = new System.Drawing.Size(192, 20);
             this.inputIP.TabIndex = 7;
@@ -120,7 +121,7 @@
             // buttonSend
             // 
             this.buttonSend.Location = new System.Drawing.Point(326, 324);
-            this.buttonSend.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSend.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(56, 19);
             this.buttonSend.TabIndex = 8;
@@ -131,7 +132,7 @@
             // buttonConnect
             // 
             this.buttonConnect.Location = new System.Drawing.Point(385, 119);
-            this.buttonConnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonConnect.Margin = new System.Windows.Forms.Padding(2);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(56, 19);
             this.buttonConnect.TabIndex = 9;
@@ -160,7 +161,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.inputUsername);
             this.Controls.Add(this.messageLog);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1_c";
             this.Text = "ChatClient";
             this.Load += new System.EventHandler(this.Form1_Load);
