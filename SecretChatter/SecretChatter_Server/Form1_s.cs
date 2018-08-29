@@ -6,10 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using System.Security.Cryptography;
 using System.IO;
 
@@ -35,30 +32,32 @@ namespace SecretChatter_Server
 
         public Form1_s()
         {
-            
             InitializeComponent();
         }
 
-        private void buttonSend_Click(object sender, EventArgs e)
+        private void sendMessage()
         {
             key = getHash(inputPassword.Text);
-           // messageLog.Text += "\r\n" + key.Length + "\r\n" + iv.Length;
-           //Send current message
-            
+            //Send current message
             if (inputText.Text.Length > 0)
             {
-                byte[] Data = EncryptTextToMemory(inputText.Text, key, iv);
+                byte[] Data = EncryptTextToMemory(username + ": " + inputText.Text, key, iv);
                 string result = System.Text.Encoding.Unicode.GetString(Data);
                 byte[] dataB = System.Text.Encoding.Unicode.GetBytes(result);
-                string Final = DecryptTextFromMemory(dataB, key, iv);
-                messageLog.Text += "\r\n " + username + ": " + " " + "Original text: " + inputText.Text + "\r\n\t" + "Encrypted text: " + Convert.ToBase64String(Data) + "\r\n";
-                //writebytes = System.Text.Encoding.Unicode.GetBytes("\r\n " + username + ": " + " " + "Received text: " + result + "\r\n\t" + "Decrypted text: ");
-                writebytes = System.Text.Encoding.Unicode.GetBytes(result);
+                messageLog.Text += username + ": " + " " + inputText.Text + "\r\n";
                 stream.Write(Data, 0, Data.Length);
                 inputText.Text = "";
             }
-            
         }
+
+
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            sendMessage();
+        }
+
+
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -143,7 +142,8 @@ namespace SecretChatter_Server
                 byte[] tempArray = new byte[byteSize];
                 Buffer.BlockCopy(readbytes, 0, tempArray, 0, byteSize);
                 string Output = DecryptTextFromMemory(tempArray, key, iv);
-                messageLog.Text += ("\r\n Received message:" + Convert.ToBase64String(tempArray) + "\r\n Decrypted message:" + Output + "\r\n");
+                messageLog.Text += Output;
+                messageLog.Text += "\r\n";
 
                 Array.Clear(readbytes, 0, readbytes.Length);
             }
@@ -270,9 +270,12 @@ namespace SecretChatter_Server
 
         }
 
-        private void inputPassword_TextChanged(object sender, EventArgs e)
+        private void inputText_KeyUp(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                sendMessage();
+            }
         }
     }
 }

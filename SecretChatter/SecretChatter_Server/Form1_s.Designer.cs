@@ -42,10 +42,10 @@
             // 
             // buttonConnect
             // 
-            this.buttonConnect.Location = new System.Drawing.Point(385, 85);
-            this.buttonConnect.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonConnect.Location = new System.Drawing.Point(513, 105);
+            this.buttonConnect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(56, 19);
+            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
             this.buttonConnect.TabIndex = 19;
             this.buttonConnect.Text = "Wait";
             this.buttonConnect.UseVisualStyleBackColor = true;
@@ -53,10 +53,10 @@
             // 
             // buttonSend
             // 
-            this.buttonSend.Location = new System.Drawing.Point(326, 325);
-            this.buttonSend.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSend.Location = new System.Drawing.Point(435, 400);
+            this.buttonSend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(56, 19);
+            this.buttonSend.Size = new System.Drawing.Size(75, 23);
             this.buttonSend.TabIndex = 18;
             this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
@@ -64,10 +64,10 @@
             // 
             // inputPassword
             // 
-            this.inputPassword.Location = new System.Drawing.Point(386, 61);
-            this.inputPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.inputPassword.Location = new System.Drawing.Point(515, 75);
+            this.inputPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputPassword.Name = "inputPassword";
-            this.inputPassword.Size = new System.Drawing.Size(192, 20);
+            this.inputPassword.Size = new System.Drawing.Size(255, 22);
             this.inputPassword.TabIndex = 15;
             this.inputPassword.Text = "randomPass";
             this.inputPassword.UseSystemPasswordChar = true;
@@ -75,49 +75,48 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(386, 45);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(515, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "Password";
             // 
             // inputText
             // 
-            this.inputText.Location = new System.Drawing.Point(9, 325);
-            this.inputText.Margin = new System.Windows.Forms.Padding(2);
+            this.inputText.Location = new System.Drawing.Point(12, 400);
+            this.inputText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputText.Name = "inputText";
-            this.inputText.Size = new System.Drawing.Size(313, 20);
+            this.inputText.Size = new System.Drawing.Size(416, 22);
             this.inputText.TabIndex = 13;
+            this.inputText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.inputText_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(386, 8);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(515, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 12;
             this.label1.Text = "Username";
             // 
             // inputUsername
             // 
-            this.inputUsername.Location = new System.Drawing.Point(386, 24);
-            this.inputUsername.Margin = new System.Windows.Forms.Padding(2);
+            this.inputUsername.Location = new System.Drawing.Point(515, 30);
+            this.inputUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputUsername.Name = "inputUsername";
-            this.inputUsername.Size = new System.Drawing.Size(192, 20);
+            this.inputUsername.Size = new System.Drawing.Size(255, 22);
             this.inputUsername.TabIndex = 11;
             this.inputUsername.Text = "Bob";
             // 
             // messageLog
             // 
-            this.messageLog.Location = new System.Drawing.Point(9, 11);
-            this.messageLog.Margin = new System.Windows.Forms.Padding(2);
+            this.messageLog.Location = new System.Drawing.Point(12, 14);
+            this.messageLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.messageLog.Multiline = true;
             this.messageLog.Name = "messageLog";
             this.messageLog.ReadOnly = true;
             this.messageLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageLog.Size = new System.Drawing.Size(374, 310);
+            this.messageLog.Size = new System.Drawing.Size(497, 381);
             this.messageLog.TabIndex = 10;
             // 
             // waitConnect
@@ -134,9 +133,9 @@
             // 
             // Form1_s
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 352);
+            this.ClientSize = new System.Drawing.Size(781, 433);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.inputPassword);
@@ -145,7 +144,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.inputUsername);
             this.Controls.Add(this.messageLog);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1_s";
             this.Text = "ChatServer";
             this.Load += new System.EventHandler(this.Form1_Load);
