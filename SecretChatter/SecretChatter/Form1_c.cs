@@ -24,6 +24,7 @@ namespace SecretChatter
         byte[] key;
         int byteSize = 0;
         bool authenticated = false;
+        bool encryptedView = false;
 
         public Form1_c()
         {           
@@ -37,11 +38,11 @@ namespace SecretChatter
             if (inputText.Text.Length > 0)
             {
                 byte[] Data = EncryptTextToMemory(username + ": " + inputText.Text, key, iv);
-                string result = System.Text.Encoding.Unicode.GetString(Data);
-                byte[] dataB = System.Text.Encoding.Unicode.GetBytes(result);
+                string result = System.Text.Encoding.Default.GetString(Data);
                 messageLog.Text += username + ": " + " " + inputText.Text + "\r\n";
                 stream.Write(Data, 0, Data.Length);
                 inputText.Text = "";
+                encryptedLog.Text += result + "\r\n";
             }
         }
 
@@ -115,6 +116,8 @@ namespace SecretChatter
                 string Output = DecryptTextFromMemory(tempArray, key, iv);
                 messageLog.Text += Output;
                 messageLog.Text += "\r\n";
+                encryptedLog.Text += System.Text.Encoding.Default.GetString(tempArray);
+                encryptedLog.Text += "\r\n";
 
                 Array.Clear(readbytes, 0, readbytes.Length);
             }
@@ -241,6 +244,24 @@ namespace SecretChatter
             if (e.KeyCode.Equals(Keys.Enter))
             {
                 sendMessage();
+            }
+        }
+
+        private void switchViewButton_Click(object sender, EventArgs e)
+        {
+            if (encryptedView)
+            {
+                encryptedView = false;
+                encryptedLog.Visible = true;
+                messageLog.Visible = false;
+                switchViewButton.Text = "Show Plaintext View";
+            }
+            else
+            {
+                encryptedView = true;
+                encryptedLog.Visible = false;
+                messageLog.Visible = true;
+                switchViewButton.Text = "Show Encrypted View";
             }
         }
     }

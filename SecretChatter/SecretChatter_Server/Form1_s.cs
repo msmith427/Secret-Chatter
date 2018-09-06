@@ -29,6 +29,7 @@ namespace SecretChatter_Server
         TcpClient tcp_client;
         bool authenticated = false;
         byte[] challange = new byte[1];
+        bool encryptedView = false;
 
         public Form1_s()
         {
@@ -42,9 +43,9 @@ namespace SecretChatter_Server
             if (inputText.Text.Length > 0)
             {
                 byte[] Data = EncryptTextToMemory(username + ": " + inputText.Text, key, iv);
-                string result = System.Text.Encoding.Unicode.GetString(Data);
-                byte[] dataB = System.Text.Encoding.Unicode.GetBytes(result);
+                string result = System.Text.Encoding.Default.GetString(Data);
                 messageLog.Text += username + ": " + " " + inputText.Text + "\r\n";
+                encryptedLog.Text += result + "\r\n";
                 stream.Write(Data, 0, Data.Length);
                 inputText.Text = "";
             }
@@ -141,6 +142,8 @@ namespace SecretChatter_Server
                 key = getHash(inputPassword.Text);
                 byte[] tempArray = new byte[byteSize];
                 Buffer.BlockCopy(readbytes, 0, tempArray, 0, byteSize);
+                encryptedLog.Text += System.Text.Encoding.Default.GetString(tempArray);
+                encryptedLog.Text += "\r\n";
                 string Output = DecryptTextFromMemory(tempArray, key, iv);
                 messageLog.Text += Output;
                 messageLog.Text += "\r\n";
@@ -275,6 +278,24 @@ namespace SecretChatter_Server
             if (e.KeyCode.Equals(Keys.Enter))
             {
                 sendMessage();
+            }
+        }
+
+        private void switchViewButton_Click(object sender, EventArgs e)
+        {
+            if (encryptedView)
+            {
+                encryptedView = false;
+                encryptedLog.Visible = true;
+                messageLog.Visible = false;
+                switchViewButton.Text = "Show Plaintext View";
+            }
+            else
+            {
+                encryptedView = true;
+                encryptedLog.Visible = false;
+                messageLog.Visible = true;
+                switchViewButton.Text = "Show Encrypted View";
             }
         }
     }
