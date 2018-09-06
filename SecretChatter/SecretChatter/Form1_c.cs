@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Net;
@@ -27,31 +21,34 @@ namespace SecretChatter
         NetworkStream stream;
         byte[] readbytes = new byte[1024];
         byte[] writebytes = new byte[1024];
-        long size = 0;
         byte[] key;
         int byteSize = 0;
         bool authenticated = false;
+        bool encryptedView = false;
+
         public Form1_c()
-        {
-           
+        {           
             InitializeComponent();
         }
 
-        private void buttonSend_Click(object sender, EventArgs e)
+        private void sendMessage()
         {
             key = getHash(inputPassword.Text);
             //Send current message
             if (inputText.Text.Length > 0)
             {
-                byte[] Data = EncryptTextToMemory(inputText.Text, key, iv);
-                string result = System.Text.Encoding.Unicode.GetString(Data);
-                byte[] dataB = System.Text.Encoding.Unicode.GetBytes(result);
-                string Final = DecryptTextFromMemory(Data, key, iv);
-                messageLog.Text += "\r\n "+username + ": " + " " + "Original text: "+inputText.Text + "\r\n\t" + "Encrypted text: " + result + "\r\n" ;
-                // writebytes = System.Text.Encoding.Unicode.GetBytes("\r\n "+username + ": " + " " + "Received text: " + result + "\r\n\t" + "Decrypted text: " + Final );
+                byte[] Data = EncryptTextToMemory(username + ": " + inputText.Text, key, iv);
+                string result = System.Text.Encoding.Default.GetString(Data);
+                messageLog.Text += username + ": " + " " + inputText.Text + "\r\n";
                 stream.Write(Data, 0, Data.Length);
                 inputText.Text = "";
+                encryptedLog.Text += result + "\r\n";
             }
+        }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            sendMessage();
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -117,7 +114,10 @@ namespace SecretChatter
                 byte[] tempArray = new byte[byteSize];
                 Buffer.BlockCopy(readbytes, 0, tempArray, 0, byteSize);
                 string Output = DecryptTextFromMemory(tempArray, key, iv);
-                messageLog.Text += ("\r\n Received message:" + Convert.ToBase64String(tempArray) + "\r\n Decrypted message:" + Output + "\r\n");
+                messageLog.Text += Output;
+                messageLog.Text += "\r\n";
+                encryptedLog.Text += System.Text.Encoding.Default.GetString(tempArray);
+                encryptedLog.Text += "\r\n";
 
                 Array.Clear(readbytes, 0, readbytes.Length);
             }
@@ -239,6 +239,31 @@ namespace SecretChatter
 
         }
 
+        private void inputText_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                sendMessage();
+            }
+        }
+
+        private void switchViewButton_Click(object sender, EventArgs e)
+        {
+            if (encryptedView)
+            {
+                encryptedView = false;
+                encryptedLog.Visible = true;
+                messageLog.Visible = false;
+                switchViewButton.Text = "Show Plaintext View";
+            }
+            else
+            {
+                encryptedView = true;
+                encryptedLog.Visible = false;
+                messageLog.Visible = true;
+                switchViewButton.Text = "Show Encrypted View";
+            }
+        }
     }
 }
 
