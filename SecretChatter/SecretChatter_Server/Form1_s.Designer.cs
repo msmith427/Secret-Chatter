@@ -38,6 +38,8 @@
             this.messageLog = new System.Windows.Forms.TextBox();
             this.waitConnect = new System.ComponentModel.BackgroundWorker();
             this.msgListen = new System.ComponentModel.BackgroundWorker();
+            this.encryptedLog = new System.Windows.Forms.TextBox();
+            this.switchViewButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -89,6 +91,7 @@
             this.inputText.Name = "inputText";
             this.inputText.Size = new System.Drawing.Size(313, 20);
             this.inputText.TabIndex = 13;
+            this.inputText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.inputText_KeyUp);
             // 
             // label1
             // 
@@ -132,11 +135,35 @@
             this.msgListen.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.msgListen_ProgressChanged);
             this.msgListen.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.msgListen_RunWorkerCompleted);
             // 
+            // encryptedLog
+            // 
+            this.encryptedLog.Location = new System.Drawing.Point(9, 11);
+            this.encryptedLog.Margin = new System.Windows.Forms.Padding(2);
+            this.encryptedLog.Multiline = true;
+            this.encryptedLog.Name = "encryptedLog";
+            this.encryptedLog.ReadOnly = true;
+            this.encryptedLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.encryptedLog.Size = new System.Drawing.Size(374, 310);
+            this.encryptedLog.TabIndex = 20;
+            this.encryptedLog.Visible = false;
+            // 
+            // switchViewButton
+            // 
+            this.switchViewButton.Location = new System.Drawing.Point(389, 321);
+            this.switchViewButton.Name = "switchViewButton";
+            this.switchViewButton.Size = new System.Drawing.Size(189, 24);
+            this.switchViewButton.TabIndex = 21;
+            this.switchViewButton.Text = "Show Encrypted View";
+            this.switchViewButton.UseVisualStyleBackColor = true;
+            this.switchViewButton.Click += new System.EventHandler(this.switchViewButton_Click);
+            // 
             // Form1_s
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 352);
+            this.Controls.Add(this.switchViewButton);
+            this.Controls.Add(this.encryptedLog);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.inputPassword);
@@ -166,6 +193,8 @@
         private System.Windows.Forms.TextBox messageLog;
         private System.ComponentModel.BackgroundWorker waitConnect;
         private System.ComponentModel.BackgroundWorker msgListen;
+        private System.Windows.Forms.TextBox encryptedLog;
+        private System.Windows.Forms.Button switchViewButton;
     }
 }
 
